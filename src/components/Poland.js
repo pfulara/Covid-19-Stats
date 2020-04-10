@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Today from "./PolandComponents/Today";
 import Total from "./PolandComponents/Total";
+import News from "./PolandComponents/News";
 import PolandChart from "./PolandComponents/PolandChart";
 
 let intervalId = null;
@@ -27,8 +29,8 @@ const Poland = () => {
       });
     setCount(0);
   }
-
   useEffect(() => {
+
     intervalId = setInterval(() => {
       setCount(prevCount => {
         return prevCount + 1;
@@ -38,11 +40,16 @@ const Poland = () => {
       clearInterval(intervalId);
     };
   }, []);
-
+  timeline.sort((a, b) => new Date(a.date) - new Date(b.date));
   return (
     <>
       {loading ? (
-        <h2 style={{ textAlign: "center" }}>Loading...</h2>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
+          <div style={{ textAlign: "center"}}>
+            <CircularProgress />
+            <h2 style={{ textAlign: "center" }}>Loading...</h2>
+          </div>
+        </div>
       ) : (
         <Grid container>
           <Grid item xs={12} md={3}>
@@ -51,6 +58,9 @@ const Poland = () => {
           <Grid item xs={12} md={9}>
             <Today stats={stats} />
             <PolandChart timeline={timeline} />
+          </Grid>
+          <Grid item xs={12}>
+            <News />
           </Grid>
         </Grid>
       )}

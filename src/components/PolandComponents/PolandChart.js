@@ -54,11 +54,11 @@ const PolandBox = styled("div")({
   padding: "10px"
 });
 
-const PolandChart = ({ timeline, active }) => {
+const PolandChart = ({ timeline }) => {
   const [activeControl, setActiveControl] = useState(true);
   const [deathsControl, setDeathsControl] = useState(true);
   const [recoveredControl, setRecoveredControl] = useState(true);
-  timeline.sort((a, b) => a.date > b.date);
+  timeline.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
     <PolandBox>

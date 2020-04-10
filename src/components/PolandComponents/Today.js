@@ -58,7 +58,7 @@ const Today = ({ stats }) => {
         <Grid item xs={12} sm={4}>
           <RecoveredDiv>
             <p>Wyleczonych:</p>
-            <Value>{stats.today.recovered || 0}</Value>
+            <Value>{stats.timeline[stats.timeline.length-1].new_recovered || 0}</Value>
           </RecoveredDiv>
         </Grid>
       </Grid>
